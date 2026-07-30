@@ -20,7 +20,7 @@ services:
     volumes:
       - ./fluxspan-worker:/app
     environment:
-      - APCA_API_KEY_ID=${ALpaca_KEY_ID}
+      - APCA_API_KEY_ID=${ALPACA_KEY_ID}
       - APCA_API_SECRET_KEY=${ALPACA_SECRET_KEY}
       - DB_HOST=postgres
       - DB_PORT=5432
