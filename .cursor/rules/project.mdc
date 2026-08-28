@@ -1,0 +1,17 @@
+---
+description: FluxSpan project overview, tech stack, and core architecture specifications
+alwaysApply: true
+---
+
+# Project Overview
+
+**FluxSpan** is a stock alert application designed to notify users when a favorited stock fluctuates within a specific time span.
+
+### Tech Stack
+
+- **Infrastructure:** Docker Compose
+- **Database:** PostgreSQL (TimescaleDB)
+- **Web API (BFF):** Python (FastAPI)
+- **Frontend:** HTML, CSS, Tailwind CSS, React
+- **Internal Middleware:** gRPC / ProtoBUF
+- **Data Worker:** Go (integrating with the Alpaca API for market data)
