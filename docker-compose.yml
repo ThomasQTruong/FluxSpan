@@ -7,6 +7,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_DB: ${DB_NAME}
       TIMESCALEDB_TELEMETRY: "off"
+      NO_TS_TUNE: "true"
     ports:
       - "5432:5432"
     volumes:
@@ -25,13 +26,15 @@ services:
     volumes:
       - ./fluxspan-worker:/app
     environment:
-      - APCA_API_KEY_ID=${ALPACA_KEY_ID}
-      - APCA_API_SECRET_KEY=${ALPACA_SECRET_KEY}
+      - APCA_API_KEY_ID=${APCA_API_KEY_ID}
+      - APCA_API_SECRET_KEY=${APCA_API_SECRET_KEY}
       - DB_HOST=postgres
       - DB_PORT=5432
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
+      - GOTOOLCHAIN=auto
+      - DB_HOST=fluxspan-db
     depends_on:
       postgres:
         condition: service_healthy
