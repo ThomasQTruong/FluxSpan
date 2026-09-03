@@ -1,0 +1,18 @@
+function Navbar() {
+  return (
+    <nav className="bg-blue-200 h-20 px-24 flex justify-between items-center">
+      {/* Logo */}
+      <div className="text-4xl font-bold text-left text-slate-900">
+        FluxSpan
+      </div>
+      {/* Navigation Links */}
+      <div className="flex items-center gap-4">
+        <a href="/login" className="text-2xl font-medium text-slate-900 hover:text-slate-700 cursor-pointer font-bold">
+          Log In
+        </a>
+      </div>
+    </nav>
+  );
+}
+
+export default Navbar;
