@@ -1,6 +1,6 @@
 function Navbar() {
   return (
-    <nav className="bg-blue-200 h-20 px-24 flex justify-between items-center">
+    <nav className="bg-blue-200 h-20 px-12 md:px-18 lg:px-24 flex justify-between items-center">
       {/* Logo */}
       <div className="text-4xl font-bold text-left text-slate-900">
         FluxSpan
