@@ -1,4 +1,4 @@
-import DashboardGrid from './components/DashboardGrid';
+import DashboardGrid from './components/dashboard/DashboardGrid';
 import Navbar from './components/Navbar';
 import Beams from './components/backgrounds/Beams';
 
