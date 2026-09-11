@@ -9,7 +9,7 @@ interface DottyBeamsProps {
   className?: string;
 }
 
-function DottyBeams({ children, className = "" }: DottyBeamsProps) {
+export function DottyBeams({ children, className = "" }: DottyBeamsProps) {
   const color1 = `rgb(143, 236, 255)`;  // original: 0, 207, 255.
   const color2 = `rgb(209, 209, 209)`;  // original: 46, 46, 46.
   const color3 = `rgb(255, 255, 255)`;  // original: 0, 0, 0.
@@ -125,5 +125,3 @@ function DottyBeams({ children, className = "" }: DottyBeamsProps) {
     </div>
   );
 }
-
-export default DottyBeams;
