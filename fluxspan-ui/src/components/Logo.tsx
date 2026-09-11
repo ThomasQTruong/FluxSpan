@@ -1,5 +1,4 @@
-function Logo() {
-
+export function Logo() {
   return (
     <div className="flex items-center select-none">
       <svg className="h-8 w-auto" viewBox="0 0 206 37" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -12,5 +11,3 @@ function Logo() {
     </div>
   );
 }
-
-export default Logo;

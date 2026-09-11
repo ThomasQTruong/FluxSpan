@@ -1,10 +1,8 @@
-"use client";
-
 // https://21st.dev/@kokonutd/components/beams-background
 
 import { useEffect, useRef } from "react";
 import { motion } from "motion/react";
-import { cn } from "../../lib/utils";
+import { cn } from "@/lib/utils";
 
 interface AnimatedGradientBackgroundProps {
   className?: string;
@@ -47,7 +45,7 @@ function createBeam(width: number, height: number): Beam {
   };
 }
 
-function Beams({
+export function Beams({
   className,
   children,
   intensity = "strong",
@@ -202,5 +200,3 @@ function Beams({
     </div>
   );
 }
-
-export default Beams;

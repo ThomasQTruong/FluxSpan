@@ -1,6 +1,6 @@
-import DashboardCard from './DashboardCard';
+import { DashboardCard } from '@/components/dashboard/DashboardCard';
 
-function DashboardGrid() {
+export function DashboardGrid() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
       <DashboardCard title="Watchlist">
@@ -20,5 +20,3 @@ function DashboardGrid() {
     </div>
   );
 }
-
-export default DashboardGrid;

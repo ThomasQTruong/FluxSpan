@@ -1,6 +1,6 @@
-import Logo from './Logo';
+import { Logo } from "@/components/Logo";
 
-function Navbar() {
+export function Navbar() {
   return (
     <nav className="h-20 px-12 md:px-18 lg:px-24 flex justify-between items-center">
       {/* Logo */}
@@ -17,5 +17,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;
