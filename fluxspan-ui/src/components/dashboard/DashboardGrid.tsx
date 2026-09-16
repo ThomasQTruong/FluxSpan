@@ -1,8 +1,13 @@
 import { DashboardCard } from '@/components/dashboard/DashboardCard';
+import { cn } from "@/lib/utils";
 
-export function DashboardGrid() {
+interface DashboardGridProps {
+  className?: string;
+}
+
+export function DashboardGrid({ className }: DashboardGridProps) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 p-4 gap-4">
+    <div className={cn("grid grid-cols-1 lg:grid-cols-2 p-4 gap-4", className)}>
       <DashboardCard title="Watchlist">
         <div>Test</div>
       </DashboardCard>

@@ -5,11 +5,9 @@ import { DottyBeams } from "@/components/backgrounds/DottyBeams";
 
 function App() {
   return (
-    <DottyBeams className="bg-slate-200">
-      { /* <div className="bg-slate-50 min-h-screen bg-[radial-gradient(var(--color-slate-300)_1px,transparent_1px)] [background-size:24px_24px]"> */}
+    <DottyBeams className="bg-slate-300">
       <Navbar />
-      <DashboardGrid />
-      { /* </div> */}
+      <DashboardGrid className="h-216 px-8"></DashboardGrid>
     </DottyBeams>
   );
 }

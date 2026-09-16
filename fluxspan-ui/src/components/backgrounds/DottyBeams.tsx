@@ -112,8 +112,8 @@ export function DottyBeams({ children, className = "" }: DottyBeamsProps) {
         className="absolute inset-0 opacity-20"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 1px 1px, rgba(0,0,0, 0.5) 1px, transparent 0)",
-          backgroundSize: "24px 24px",
+            "radial-gradient(circle at 1px 1px, rgb(149, 149, 149) 2px, transparent 0)",
+          backgroundSize: "48px 48px",
         }}
       />
 
