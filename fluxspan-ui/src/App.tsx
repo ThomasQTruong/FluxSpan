@@ -1,16 +1,18 @@
-import { DashboardGrid } from "@/components/dashboard/DashboardGrid";
-import { Navbar } from "@/components/Navbar";
-import { DottyBeams } from "@/components/backgrounds/DottyBeams";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { DashboardPage } from "@/pages/DashboardPage";
+import { LoginPage } from "@/pages/LoginPage";
 
-function App() {
-  return (
-    <DottyBeams className="bg-slate-300">
-      <Navbar />
-      <div className="w-full flex flex-col h-screen lg:h-[calc(100dvh-5rem)]">
-        <DashboardGrid className="pb-8 px-8 h-512 lg:flex-1"></DashboardGrid>
-      </div>
-    </DottyBeams>
-  );
+const router = createBrowserRouter([
+  {
+    path: "/dashboard",
+    element: <DashboardPage />,
+  },
+  {
+    path: "/login",
+    element: <LoginPage />,
+  },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App;
