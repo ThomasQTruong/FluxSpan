@@ -21,6 +21,13 @@ export function AuthForm({className}: AuthFormProps) {
                    className="w-full border rounded-md p-2 hover:border-gray-700 hover:bg-gray-100
                              transition-colors duration-300 ease-in-out" />
           </div>
+          <div className="w-full flex flex-row items-center justify-between">
+            <div className="flex flex-row gap-1 items-center">
+              <input type="checkbox" id="rememberMe" className="w-4 h-4" />
+              <label htmlFor="rememberMe" className="text-xs sm:text-sm">Stay Signed In</label>
+            </div>
+            <Link to="./" className="text-xs sm:text-sm underline hover:text-cyan-500">Forgot Password?</Link>
+          </div>
           <button type="submit" className="w-full rounded-4xl bg-cyan-500/60 hover:bg-cyan-500/75
                                     transition-colors duration-300 ease-in-out p-2">Submit</button>
         </form>
@@ -28,8 +35,9 @@ export function AuthForm({className}: AuthFormProps) {
         <div className="w-full">
           <hr className="border-gray-300 m-2 md:m-4" />
           <div className="w-full flex flex-row justify-center items-center gap-1">
-            <span className="text-sm">Don't have an account?</span>
-            <Link to="./" className="text-sm underline text-cyan-500">Sign Up instead.</Link>
+            <span className="text-xs sm:text-sm">Don't have an account?</span>
+            <Link to="./" className="text-xs sm:text-sm underline
+                                     text-cyan-500">Sign Up instead.</Link>
           </div>
         </div>
       </div>
