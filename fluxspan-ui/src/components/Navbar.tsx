@@ -16,7 +16,8 @@ export function Navbar({ logoClassName, linkClassName }: NavbarProps) {
       </Link>
       {/* Navigation Links */}
       <div className="flex items-center gap-4">
-        <Link to="/login" className={cn("text-2xl font-medium text-slate-900 cursor-pointer font-semibold hover:text-slate-700", linkClassName)}>
+        <Link to="/login" className={cn("text-2xl font-medium text-slate-900 cursor-pointer",
+                                        "font-semibold hover:text-slate-700", linkClassName)}>
           Log In
         </Link>
       </div>
