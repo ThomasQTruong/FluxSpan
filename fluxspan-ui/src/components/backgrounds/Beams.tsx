@@ -45,11 +45,8 @@ function createBeam(width: number, height: number): Beam {
   };
 }
 
-export function Beams({
-  className,
-  children,
-  intensity = "strong",
-}: AnimatedGradientBackgroundProps) {
+export function Beams({ className, children, intensity = "strong" }:
+                        AnimatedGradientBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const beamsRef = useRef<Beam[]>([]);
   const animationFrameRef = useRef<number>(0);
