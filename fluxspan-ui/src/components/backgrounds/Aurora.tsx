@@ -1,8 +1,8 @@
 // https://21st.dev/@dhileepkumargm/components/aurora-background
 
-import React from "react"
-import { cn } from "@/lib/utils";
-import { motion } from "motion/react"
+import React from 'react';
+import { cn } from '@/lib/utils';
+import { motion } from 'motion/react';
 
 export interface AuroraBackgroundProps {
   /** Extra wrapper classes */
@@ -20,15 +20,15 @@ export interface AuroraBackgroundProps {
 }
 
 export function Aurora({
-  className = "",
+  className = '',
   children,
   starCount = 50,
   gradientColors = [
-    "var(--aurora-color1, rgb(168 85 247 / 0.2))",
-    "var(--aurora-color2, rgb(79 70 229 / 0.2))",
+    'var(--aurora-color1, rgb(168 85 247 / 0.2))',
+    'var(--aurora-color2, rgb(79 70 229 / 0.2))',
   ],
   pulseDuration = 10,
-  ariaLabel = "Animated aurora background",
+  ariaLabel = 'Animated aurora background',
 }: AuroraBackgroundProps) {
   const [colorA, colorB] = gradientColors;
 
@@ -45,8 +45,8 @@ export function Aurora({
   // the parent) if you need that.
   const [stars] = React.useState(() =>
     Array.from({ length: starCount }).map(() => ({
-      x: `${ Math.random() * 100 }vw`,
-      y: `${ Math.random() * 100 }vh`,
+      x: `${Math.random() * 100}vw`,
+      y: `${Math.random() * 100}vh`,
       peakOpacity: Math.random() * 0.8,
       duration: Math.random() * 3 + 2,
       delay: Math.random() * 5,
@@ -54,96 +54,108 @@ export function Aurora({
   );
 
   return (
-    <div role="img" aria-label={ ariaLabel } className={ cn("relative w-screen h-screen",
-            "items-center justify-center bg-black", "overflow-hidden", className) }
+    <div
+      role="img"
+      aria-label={ariaLabel}
+      className={cn(
+        'relative h-screen w-screen',
+        'items-center justify-center bg-black',
+        'overflow-hidden',
+        className
+      )}
     >
-      { /* Background layers (hidden from screen readers). */ }
+      {/* Background layers (hidden from screen readers). */}
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        { /* Pulsing radial gradients */ }
-        <div className="animate-[aurora-pulse_var(--aurora-pulse-duration)_infinite]
-                        absolute inset-0 opacity-50"
-             style={
-               {
-                 backgroundImage: `
-                   radial-gradient(circle, ${ colorA } 0%, transparent 80%),
-                   radial-gradient(circle, ${ colorB } 0%, transparent 80%)
+        {/* Pulsing radial gradients */}
+        <div
+          className="absolute inset-0 animate-[aurora-pulse_var(--aurora-pulse-duration)_infinite] opacity-50"
+          style={
+            {
+              backgroundImage: `
+                   radial-gradient(circle, ${colorA} 0%, transparent 80%),
+                   radial-gradient(circle, ${colorB} 0%, transparent 80%)
                  `,
-                 backgroundSize: "100% 100%",
-                 "--aurora-pulse-duration": `${ pulseDuration }s`,
-               } as React.CSSProperties
-             }
+              backgroundSize: '100% 100%',
+              '--aurora-pulse-duration': `${pulseDuration}s`,
+            } as React.CSSProperties
+          }
         />
 
         {/* Blurred color blobs */}
-        <motion.div className="absolute inset-0 mix-blend-screen" initial={{ opacity: 0 }} 
-                animate={{ opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }}
+        <motion.div
+          className="absolute inset-0 mix-blend-screen"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, ease: 'easeInOut' }}
         >
-          <motion.div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-purple-600 rounded-full
-                                 blur-3xl opacity-40"
-                      animate={{
-                        x: [-50, 50, -50],
-                        y: [-20, 20, -20],
-                        scale: [1, 1.2, 1],
-                      }}
-                      transition={{
-                        duration: 30,
-                        repeat: Infinity,
-                        repeatType: "mirror",
-                        ease: "easeInOut",
-                      }}
+          <motion.div
+            className="absolute -top-1/4 -left-1/4 h-1/2 w-1/2 rounded-full bg-purple-600 opacity-40 blur-3xl"
+            animate={{
+              x: [-50, 50, -50],
+              y: [-20, 20, -20],
+              scale: [1, 1.2, 1],
+            }}
+            transition={{
+              duration: 30,
+              repeat: Infinity,
+              repeatType: 'mirror',
+              ease: 'easeInOut',
+            }}
           />
-          <motion.div className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-fuchsia-600
-                                 rounded-full blur-3xl opacity-40"
-                      animate={{
-                        x: [50, -50, 50],
-                        y: [20, -20, 20],
-                        scale: [1, 1.3, 1],
-                      }}
-                      transition={{
-                        duration: 40,
-                        repeat: Infinity,
-                        repeatType: "mirror",
-                        ease: "easeInOut",
-                      }}
+          <motion.div
+            className="absolute -right-1/4 -bottom-1/4 h-1/2 w-1/2 rounded-full bg-fuchsia-600 opacity-40 blur-3xl"
+            animate={{
+              x: [50, -50, 50],
+              y: [20, -20, 20],
+              scale: [1, 1.3, 1],
+            }}
+            transition={{
+              duration: 40,
+              repeat: Infinity,
+              repeatType: 'mirror',
+              ease: 'easeInOut',
+            }}
           />
-          <motion.div className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-indigo-700 rounded-full
-                                 blur-3xl opacity-30"
-                      animate={{
-                        x: [20, -20, 20],
-                        y: [-30, 30, -30],
-                        rotate: [0, 360, 0],
-                      }}
-                      transition={{
-                        duration: 50,
-                        repeat: Infinity,
-                        repeatType: "mirror",
-                        ease: "easeInOut",
-                      }}
+          <motion.div
+            className="absolute top-1/3 left-1/3 h-1/3 w-1/3 rounded-full bg-indigo-700 opacity-30 blur-3xl"
+            animate={{
+              x: [20, -20, 20],
+              y: [-30, 30, -30],
+              rotate: [0, 360, 0],
+            }}
+            transition={{
+              duration: 50,
+              repeat: Infinity,
+              repeatType: 'mirror',
+              ease: 'easeInOut',
+            }}
           />
         </motion.div>
 
-        { /* Twinkling stars */ }
-        { stars.map((star, i) => (
-          <motion.div key={ i } className="absolute w-0.5 h-0.5 bg-white rounded-full"
-                      initial={{
-                        x: star.x,
-                        y: star.y,
-                        opacity: 0,
-                      }}
-                      animate={{
-                        opacity: [0, star.peakOpacity, 0],
-                      }}
-                      transition={{
-                        duration: star.duration,
-                        repeat: Infinity,
-                        delay: star.delay,
-                      }}
+        {/* Twinkling stars */}
+        {stars.map((star, i) => (
+          <motion.div
+            key={i}
+            className="absolute h-0.5 w-0.5 rounded-full bg-white"
+            initial={{
+              x: star.x,
+              y: star.y,
+              opacity: 0,
+            }}
+            animate={{
+              opacity: [0, star.peakOpacity, 0],
+            }}
+            transition={{
+              duration: star.duration,
+              repeat: Infinity,
+              delay: star.delay,
+            }}
           />
         ))}
       </div>
 
-      { /* Foreground content */ }
-      <div className="relative z-10">{ children }</div>
+      {/* Foreground content */}
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }

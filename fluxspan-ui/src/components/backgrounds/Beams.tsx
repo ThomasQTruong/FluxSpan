@@ -1,13 +1,13 @@
 // https://21st.dev/@kokonutd/components/beams-background
 
-import { useEffect, useRef } from "react";
-import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+import { useEffect, useRef } from 'react';
+import { motion } from 'motion/react';
+import { cn } from '@/lib/utils';
 
 interface AnimatedGradientBackgroundProps {
   className?: string;
   children?: React.ReactNode;
-  intensity?: "subtle" | "medium" | "strong";
+  intensity?: 'subtle' | 'medium' | 'strong';
 }
 
 interface Beam {
@@ -45,8 +45,11 @@ function createBeam(width: number, height: number): Beam {
   };
 }
 
-export function Beams({ className, children, intensity = "strong" }:
-                        AnimatedGradientBackgroundProps) {
+export function Beams({
+  className,
+  children,
+  intensity = 'strong',
+}: AnimatedGradientBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const beamsRef = useRef<Beam[]>([]);
   const animationFrameRef = useRef<number>(0);
@@ -56,15 +59,15 @@ export function Beams({ className, children, intensity = "strong" }:
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
     const updateCanvasSize = () => {
       const dpr = window.devicePixelRatio || 1;
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${ window.innerWidth }px`;
-      canvas.style.height = `${ window.innerHeight }px`;
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
       ctx.scale(dpr, dpr);
 
       const totalBeams = MINIMUM_BEAMS * 1.5;
@@ -74,7 +77,7 @@ export function Beams({ className, children, intensity = "strong" }:
     };
 
     updateCanvasSize();
-    window.addEventListener("resize", updateCanvasSize);
+    window.addEventListener('resize', updateCanvasSize);
 
     function resetBeam(beam: Beam, index: number, totalBeams: number) {
       if (!canvas) return beam;
@@ -84,9 +87,7 @@ export function Beams({ className, children, intensity = "strong" }:
 
       beam.y = canvas.height + 100;
       beam.x =
-        column * spacing +
-        spacing / 2 +
-        (Math.random() - 0.5) * spacing * 0.5;
+        column * spacing + spacing / 2 + (Math.random() - 0.5) * spacing * 0.5;
       beam.width = 100 + Math.random() * 100;
       beam.speed = 0.5 + Math.random() * 0.4;
       beam.hue = 190 + (index * 70) / totalBeams;
@@ -108,24 +109,24 @@ export function Beams({ className, children, intensity = "strong" }:
       const gradient = ctx.createLinearGradient(0, 0, 0, beam.length);
 
       // Enhanced gradient with multiple color stops
-      gradient.addColorStop(0, `hsla(${ beam.hue }, 85%, 65%, 0)`);
+      gradient.addColorStop(0, `hsla(${beam.hue}, 85%, 65%, 0)`);
       gradient.addColorStop(
         0.1,
-        `hsla(${ beam.hue }, 85%, 65%, ${ pulsingOpacity * 0.5 })`
+        `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity * 0.5})`
       );
       gradient.addColorStop(
         0.4,
-        `hsla(${ beam.hue }, 85%, 65%, ${ pulsingOpacity })`
+        `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity})`
       );
       gradient.addColorStop(
         0.6,
-        `hsla(${ beam.hue }, 85%, 65%, ${ pulsingOpacity })`
+        `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity})`
       );
       gradient.addColorStop(
         0.9,
-        `hsla(${ beam.hue }, 85%, 65%, ${ pulsingOpacity * 0.5 })`
+        `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity * 0.5})`
       );
-      gradient.addColorStop(1, `hsla(${ beam.hue }, 85%, 65%, 0)`);
+      gradient.addColorStop(1, `hsla(${beam.hue}, 85%, 65%, 0)`);
 
       ctx.fillStyle = gradient;
       ctx.fillRect(-beam.width / 2, 0, beam.width, beam.length);
@@ -136,7 +137,7 @@ export function Beams({ className, children, intensity = "strong" }:
       if (!canvas || !ctx) return;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.filter = "blur(35px)";
+      ctx.filter = 'blur(35px)';
 
       const totalBeams = beamsRef.current.length;
       beamsRef.current.forEach((beam, index) => {
@@ -157,7 +158,7 @@ export function Beams({ className, children, intensity = "strong" }:
     animate();
 
     return () => {
-      window.removeEventListener("resize", updateCanvasSize);
+      window.removeEventListener('resize', updateCanvasSize);
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
@@ -165,24 +166,31 @@ export function Beams({ className, children, intensity = "strong" }:
   }, [intensity]);
 
   return (
-    <div className={ cn("relative min-h-screen w-full overflow-hidden", className) }>
-      <canvas ref={ canvasRef } className="absolute inset-0" style={{ filter: "blur(15px)" }} />
-      <motion.div className="absolute inset-0 bg-neutral-950/5"
-                  animate={{
-                    opacity: [0.05, 0.15, 0.05],
-                  }}
-                  transition={{
-                    duration: 10,
-                    ease: "easeInOut",
-                    repeat: Number.POSITIVE_INFINITY,
-                  }}
-                  style={{
-                    backdropFilter: "blur(50px)",
-                  }}
+    <div
+      className={cn('relative min-h-screen w-full overflow-hidden', className)}
+    >
+      <canvas
+        ref={canvasRef}
+        className="absolute inset-0"
+        style={{ filter: 'blur(15px)' }}
+      />
+      <motion.div
+        className="absolute inset-0 bg-neutral-950/5"
+        animate={{
+          opacity: [0.05, 0.15, 0.05],
+        }}
+        transition={{
+          duration: 10,
+          ease: 'easeInOut',
+          repeat: Number.POSITIVE_INFINITY,
+        }}
+        style={{
+          backdropFilter: 'blur(50px)',
+        }}
       />
 
-      { /* Content */ }
-      <div className="relative z-10">{ children }</div>
+      {/* Content */}
+      <div className="relative z-10">{children}</div>
     </div>
   );
 }

@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 
 interface AuthCardFooterProps {
   message?: string;
@@ -7,17 +6,22 @@ interface AuthCardFooterProps {
   link?: string;
 }
 
-export function AuthCardFooter({ message, linkMessage, link="./" }: AuthCardFooterProps) {
+export function AuthCardFooter({
+  message,
+  linkMessage,
+  link = './',
+}: AuthCardFooterProps) {
   return (
     <div className="w-full">
-      <hr className="w-full border-gray-300 mt-2 mdt:m-4" />
+      <hr className="mdt:m-4 mt-2 w-full border-gray-300" />
 
-      <div className="w-full flex flex-row justify-center items-center gap-1 p-3">
-        <span className="text-xs sm:text-sm">{ message }</span>
-        <Link to={ link } className="text-xs sm:text-sm underline text-cyan-500 hover:text-cyan-600
-                transition-colors duration-300 ease-in-out"
+      <div className="flex w-full flex-row items-center justify-center gap-1 p-3">
+        <span className="text-xs sm:text-sm">{message}</span>
+        <Link
+          to={link}
+          className="text-xs text-cyan-500 underline transition-colors duration-300 ease-in-out hover:text-cyan-600 sm:text-sm"
         >
-          { linkMessage }
+          {linkMessage}
         </Link>
       </div>
     </div>
