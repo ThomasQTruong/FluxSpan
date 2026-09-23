@@ -19,7 +19,7 @@ export function LoginPage() {
         <LoginForm />
 
         { /* Social auth option(s). */ }
-        <SocialAuth />
+        <SocialAuth message="Or Sign In With:" />
 
         { /* Auth card footer (sign up). */ }
         <AuthCardFooter message="Don't have an account?" linkMessage="Sign Up instead."

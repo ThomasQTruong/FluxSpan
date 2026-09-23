@@ -15,7 +15,7 @@ export function SignUpPage() {
         </div>
 
         { /* Social auth option(s). */ }
-        <SocialAuth />
+        <SocialAuth message="Or Sign Up With:" />
 
         { /* Auth card footer (sign in). */ }
         <AuthCardFooter message="Already have an account?" linkMessage="Sign In instead."
