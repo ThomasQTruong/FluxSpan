@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export function LoginForm() {
   return (
     <form className="w-full px-8 sm:px-12 flex flex-col gap-6 justify-center items-center">
-      {/* Email/Password inputs. */}
+      { /* Email/Password inputs. */ }
       <div className="w-full flex flex-col gap-2 sm:gap-4">
         <div>
           <span className="text-sm">Email</span>
@@ -18,7 +18,7 @@ export function LoginForm() {
                                       transition-colors duration-300 ease-in-out" />
         </div>
       </div>
-      {/* RememberMe and Forgot Password options. */}
+      { /* RememberMe and Forgot Password options. */ }
       <div className="w-full flex flex-row items-center justify-between">
         <div className="flex flex-row gap-1 items-center">
           <input type="checkbox" id="rememberMe" className="w-4 h-4" />
@@ -29,7 +29,7 @@ export function LoginForm() {
           Forgot Password?
         </Link>
       </div>
-      {/* Submit button. */}
+      { /* Submit button. */ }
       <button type="submit" className="w-full rounded-4xl bg-cyan-500/60 hover:bg-cyan-500/75
                                 transition-colors duration-300 ease-in-out p-2">Submit</button>
     </form>

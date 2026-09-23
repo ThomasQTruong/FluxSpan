@@ -63,8 +63,8 @@ export function Beams({ className, children, intensity = "strong" }:
       const dpr = window.devicePixelRatio || 1;
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
+      canvas.style.width = `${ window.innerWidth }px`;
+      canvas.style.height = `${ window.innerHeight }px`;
       ctx.scale(dpr, dpr);
 
       const totalBeams = MINIMUM_BEAMS * 1.5;
@@ -108,24 +108,24 @@ export function Beams({ className, children, intensity = "strong" }:
       const gradient = ctx.createLinearGradient(0, 0, 0, beam.length);
 
       // Enhanced gradient with multiple color stops
-      gradient.addColorStop(0, `hsla(${beam.hue}, 85%, 65%, 0)`);
+      gradient.addColorStop(0, `hsla(${ beam.hue }, 85%, 65%, 0)`);
       gradient.addColorStop(
         0.1,
-        `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity * 0.5})`
+        `hsla(${ beam.hue }, 85%, 65%, ${ pulsingOpacity * 0.5 })`
       );
       gradient.addColorStop(
         0.4,
-        `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity})`
+        `hsla(${ beam.hue }, 85%, 65%, ${ pulsingOpacity })`
       );
       gradient.addColorStop(
         0.6,
-        `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity})`
+        `hsla(${ beam.hue }, 85%, 65%, ${ pulsingOpacity })`
       );
       gradient.addColorStop(
         0.9,
-        `hsla(${beam.hue}, 85%, 65%, ${pulsingOpacity * 0.5})`
+        `hsla(${ beam.hue }, 85%, 65%, ${ pulsingOpacity * 0.5 })`
       );
-      gradient.addColorStop(1, `hsla(${beam.hue}, 85%, 65%, 0)`);
+      gradient.addColorStop(1, `hsla(${ beam.hue }, 85%, 65%, 0)`);
 
       ctx.fillStyle = gradient;
       ctx.fillRect(-beam.width / 2, 0, beam.width, beam.length);
@@ -165,35 +165,24 @@ export function Beams({ className, children, intensity = "strong" }:
   }, [intensity]);
 
   return (
-    <div
-      className={cn(
-        "relative min-h-screen w-full overflow-hidden",
-        className
-      )}
-    >
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0"
-        style={{ filter: "blur(15px)" }}
-      />
+    <div className={ cn("relative min-h-screen w-full overflow-hidden", className) }>
+      <canvas ref={ canvasRef } className="absolute inset-0" style={{ filter: "blur(15px)" }} />
 
-      <motion.div
-        className="absolute inset-0 bg-neutral-950/5"
-        animate={{
-          opacity: [0.05, 0.15, 0.05],
-        }}
-        transition={{
-          duration: 10,
-          ease: "easeInOut",
-          repeat: Number.POSITIVE_INFINITY,
-        }}
-        style={{
-          backdropFilter: "blur(50px)",
-        }}
-      />
+      <motion.div className="absolute inset-0 bg-neutral-950/5"
+                  animate={{
+                    opacity: [0.05, 0.15, 0.05],
+                  }}
+                  transition={{
+                    duration: 10,
+                    ease: "easeInOut",
+                    repeat: Number.POSITIVE_INFINITY,
+                  }}
+                  style={{
+                    backdropFilter: "blur(50px)",
+                  }} />
 
-      {/* Content */}
-      <div className="relative z-10">{children}</div>
+      { /* Content */ }
+      <div className="relative z-10">{ children }</div>
     </div>
   );
 }

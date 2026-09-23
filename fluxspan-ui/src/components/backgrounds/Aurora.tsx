@@ -41,12 +41,12 @@ export function Aurora({
   //
   // Trade-off: this only generates stars once, on mount. If starCount
   // changes after the component has mounted, the star count won't update
-  // on its own — remount the component (e.g. via a `key={starCount}` from
+  // on its own — remount the component (e.g. via a `key={ starCount }` from
   // the parent) if you need that.
   const [stars] = React.useState(() =>
     Array.from({ length: starCount }).map(() => ({
-      x: `${Math.random() * 100}vw`,
-      y: `${Math.random() * 100}vh`,
+      x: `${ Math.random() * 100 }vw`,
+      y: `${ Math.random() * 100 }vh`,
       peakOpacity: Math.random() * 0.8,
       duration: Math.random() * 3 + 2,
       delay: Math.random() * 5,
@@ -56,22 +56,24 @@ export function Aurora({
   return (
     <div
       role="img"
-      aria-label={ariaLabel}
-      className={cn("relative w-screen h-screen items-center justify-center bg-black overflow-hidden", className)}
+      aria-label={ ariaLabel }
+      className={ cn("relative w-screen h-screen items-center justify-center bg-black",
+                     "overflow-hidden", className) }
     >
-      {/* Background layers (hidden from screen readers) */}
+      { /* Background layers (hidden from screen readers). */ }
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
-        {/* Pulsing radial gradients */}
+        { /* Pulsing radial gradients */ }
         <div
-          className="absolute inset-0 opacity-50 animate-[aurora-pulse_var(--aurora-pulse-duration)_infinite]"
+          className="absolute inset-0 opacity-50
+                     animate-[aurora-pulse_var(--aurora-pulse-duration)_infinite]"
           style={
             {
               backgroundImage: `
-                radial-gradient(circle, ${colorA} 0%, transparent 80%),
-                radial-gradient(circle, ${colorB} 0%, transparent 80%)
+                radial-gradient(circle, ${ colorA } 0%, transparent 80%),
+                radial-gradient(circle, ${ colorB } 0%, transparent 80%)
               `,
               backgroundSize: "100% 100%",
-              "--aurora-pulse-duration": `${pulseDuration}s`,
+              "--aurora-pulse-duration": `${ pulseDuration }s`,
             } as React.CSSProperties
           }
         />
@@ -81,8 +83,7 @@ export function Aurora({
           className="absolute inset-0 mix-blend-screen"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
-        >
+          transition={{ duration: 1, ease: "easeInOut" }}>
           <motion.div
             className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-purple-600 rounded-full blur-3xl
                        opacity-40"
@@ -96,8 +97,7 @@ export function Aurora({
               repeat: Infinity,
               repeatType: "mirror",
               ease: "easeInOut",
-            }}
-          />
+            }} />
           <motion.div
             className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-fuchsia-600 rounded-full
                        blur-3xl opacity-40"
@@ -111,8 +111,7 @@ export function Aurora({
               repeat: Infinity,
               repeatType: "mirror",
               ease: "easeInOut",
-            }}
-          />
+            }} />
           <motion.div
             className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-indigo-700 rounded-full blur-3xl
                        opacity-30"
@@ -126,14 +125,13 @@ export function Aurora({
               repeat: Infinity,
               repeatType: "mirror",
               ease: "easeInOut",
-            }}
-          />
+            }} />
         </motion.div>
 
-        {/* Twinkling stars */}
-        {stars.map((star, i) => (
+        { /* Twinkling stars */ }
+        { stars.map((star, i) => (
           <motion.div
-            key={i}
+            key={ i }
             className="absolute w-0.5 h-0.5 bg-white rounded-full"
             initial={{
               x: star.x,
@@ -147,13 +145,12 @@ export function Aurora({
               duration: star.duration,
               repeat: Infinity,
               delay: star.delay,
-            }}
-          />
+            }} />
         ))}
       </div>
 
-      {/* Foreground content */}
-      <div className="relative z-10">{children}</div>
+      { /* Foreground content */ }
+      <div className="relative z-10">{ children }</div>
     </div>
   );
 }

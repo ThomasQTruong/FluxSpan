@@ -7,7 +7,7 @@ interface DashboardGridProps {
 
 export function DashboardGrid({ className }: DashboardGridProps) {
   return (
-    <div className={cn("h-full grid grid-cols-1 lg:grid-cols-2 p-4 gap-4", className)}>
+    <div className={ cn("h-full grid grid-cols-1 lg:grid-cols-2 p-4 gap-4", className) }>
       <DashboardCard title="Watchlist">
         <div>Test</div>
       </DashboardCard>
