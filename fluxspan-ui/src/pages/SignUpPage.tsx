@@ -2,20 +2,24 @@ import { DottyBeams } from "@/components/backgrounds/DottyBeams";
 import { Navbar } from "@/components/Navbar";
 import { AuthCard } from "@/components/auth/AuthCard";
 import { SocialAuth } from "@/components/auth/SocialAuth";
+import { AuthCardFooter } from "@/components/auth/AuthCardFooter";
 
 export function SignUpPage() {
   return (
     <DottyBeams className="bg-slate-300">
       <Navbar />
       <AuthCard>
-        {/* Auth title. */}
+        { /* Auth title. */ }
         <div className="text-2xl sm:text-4xl mb-4 sm:mb-8">
           <span className="font-bold">Sign Up</span>
         </div>
 
-        {/* Social auth option(s). */}
+        { /* Social auth option(s). */ }
         <SocialAuth />
 
+        { /* Auth card footer (sign in). */ }
+        <AuthCardFooter message="Already have an account?" linkMessage="Sign In instead."
+                        link="/login" />
       </AuthCard>
     </DottyBeams>
   );
