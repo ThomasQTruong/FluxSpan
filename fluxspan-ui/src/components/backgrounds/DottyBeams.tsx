@@ -44,7 +44,8 @@ export function DottyBeams({ children, className }: DottyBeamsProps) {
                mask:
                  `radial-gradient(125% 100% at 0% 0%, ${ color3 } 0%,
                  ${ withOpacity(color3, 0.224) } 88.2883%, ${ withOpacity(color3, 0) } 100%)`,
-             }}>
+             }}
+        >
           { /* Skewed fading blue streaks */ }
           <div className="absolute inset-0 opacity-20"
                style={{
@@ -55,7 +56,8 @@ export function DottyBeams({ children, className }: DottyBeamsProps) {
                    ${ withOpacity(color3, 0) } 36%, ${ color3 } 55%, ${ withOpacity(color3, 0.13) } 67%,
                    ${ color3 } 78%, ${ withOpacity(color3, 0) } 97%)`,
                  transform: "skewX(45deg)",
-               }} />
+               }}
+          />
           <div className="absolute inset-0 opacity-20"
                style={{
                  background:
@@ -65,7 +67,8 @@ export function DottyBeams({ children, className }: DottyBeamsProps) {
                    ${ withOpacity(color3, 0.55) } 41%, ${ withOpacity(color3, 0.13) } 67%,
                    ${ color3 } 78%, ${ withOpacity(color3, 0) } 97%)`,
                  transform: "skewX(45deg)",
-               }} />
+               }}
+          />
           <div className="absolute inset-0 opacity-20"
                style={{
                  background:
@@ -77,7 +80,8 @@ export function DottyBeams({ children, className }: DottyBeamsProps) {
                    ${ withOpacity(color3, 0.13) } 78%, ${ color3 } 88%,
                    ${ withOpacity(color3, 0) } 97%)`,
                  transform: "skewX(45deg)",
-               }} />
+               }}
+          />
           <div className="absolute inset-0 opacity-20"
                style={{
                  background:
@@ -88,7 +92,8 @@ export function DottyBeams({ children, className }: DottyBeamsProps) {
                    47%, ${ withOpacity(color3, 0.13) } 69%, ${ color3 } 79%,
                    ${ withOpacity(color3, 0) } 97%)`,
                  transform: "skewX(45deg)",
-               }} />
+               }}
+          />
           <div className="absolute inset-0 opacity-20"
                style={{
                  background:
@@ -99,7 +104,8 @@ export function DottyBeams({ children, className }: DottyBeamsProps) {
                    48%, ${ withOpacity(color3, 0.13) } 67%, ${ color3 } 74%, ${ color3 } 82%,
                    ${ withOpacity(color3, 0.47) } 88%, ${ withOpacity(color3, 0) } 97%)`,
                  transform: "skewX(45deg)",
-               }} />
+               }}
+          />
         </div>
       </div>
 
@@ -107,7 +113,8 @@ export function DottyBeams({ children, className }: DottyBeamsProps) {
            style={{
              backgroundImage: `url(${ bgImage })`,
              backgroundSize: "149.76px",
-           }} />
+           }}
+      />
 
       { /* Subtle dot pattern overlay */ }
       <div className="absolute inset-0 opacity-20"
@@ -115,11 +122,13 @@ export function DottyBeams({ children, className }: DottyBeamsProps) {
              backgroundImage:
                "radial-gradient(circle at 1px 1px, rgb(149, 149, 149) 2px, transparent 0)",
              backgroundSize: "48px 48px",
-           }} />
+           }}
+      />
 
       { /* Subtle radial highlight */ }
       <div className="absolute inset-0 bg-gradient-radial from-slate-800/20 via-transparent
-                      to-transparent" />
+                      to-transparent"
+      />
 
       { /* Content */ }
       <div className="relative z-10">{ children }</div>

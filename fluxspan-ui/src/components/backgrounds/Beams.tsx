@@ -167,7 +167,6 @@ export function Beams({ className, children, intensity = "strong" }:
   return (
     <div className={ cn("relative min-h-screen w-full overflow-hidden", className) }>
       <canvas ref={ canvasRef } className="absolute inset-0" style={{ filter: "blur(15px)" }} />
-
       <motion.div className="absolute inset-0 bg-neutral-950/5"
                   animate={{
                     opacity: [0.05, 0.15, 0.05],
@@ -179,7 +178,8 @@ export function Beams({ className, children, intensity = "strong" }:
                   }}
                   style={{
                     backdropFilter: "blur(50px)",
-                  }} />
+                  }}
+      />
 
       { /* Content */ }
       <div className="relative z-10">{ children }</div>

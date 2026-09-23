@@ -12,12 +12,13 @@ export function Navbar({ logoClassName, linkClassName }: NavbarProps) {
     <nav className="h-20 px-12 md:px-18 lg:px-24 flex justify-between items-center">
       {/* Logo */}
       <Link to="/dashboard">
-        <Logo textClassName={cn(logoClassName)}></Logo>
+        <Logo textClassName={ logoClassName } />
       </Link>
       {/* Navigation Links */}
       <div className="flex items-center gap-4">
         <Link to="/login" className={ cn("text-2xl font-medium text-slate-900 cursor-pointer",
-                                         "font-semibold hover:text-slate-700", linkClassName) }>
+                                         "font-semibold hover:text-slate-700", linkClassName) }
+        >
           Log In
         </Link>
       </div>

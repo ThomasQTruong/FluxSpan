@@ -54,98 +54,91 @@ export function Aurora({
   );
 
   return (
-    <div
-      role="img"
-      aria-label={ ariaLabel }
-      className={ cn("relative w-screen h-screen items-center justify-center bg-black",
-                     "overflow-hidden", className) }
+    <div role="img" aria-label={ ariaLabel } className={ cn("relative w-screen h-screen",
+            "items-center justify-center bg-black", "overflow-hidden", className) }
     >
       { /* Background layers (hidden from screen readers). */ }
       <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
         { /* Pulsing radial gradients */ }
-        <div
-          className="absolute inset-0 opacity-50
-                     animate-[aurora-pulse_var(--aurora-pulse-duration)_infinite]"
-          style={
-            {
-              backgroundImage: `
-                radial-gradient(circle, ${ colorA } 0%, transparent 80%),
-                radial-gradient(circle, ${ colorB } 0%, transparent 80%)
-              `,
-              backgroundSize: "100% 100%",
-              "--aurora-pulse-duration": `${ pulseDuration }s`,
-            } as React.CSSProperties
-          }
+        <div className="animate-[aurora-pulse_var(--aurora-pulse-duration)_infinite]
+                        absolute inset-0 opacity-50"
+             style={
+               {
+                 backgroundImage: `
+                   radial-gradient(circle, ${ colorA } 0%, transparent 80%),
+                   radial-gradient(circle, ${ colorB } 0%, transparent 80%)
+                 `,
+                 backgroundSize: "100% 100%",
+                 "--aurora-pulse-duration": `${ pulseDuration }s`,
+               } as React.CSSProperties
+             }
         />
 
         {/* Blurred color blobs */}
-        <motion.div
-          className="absolute inset-0 mix-blend-screen"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, ease: "easeInOut" }}>
-          <motion.div
-            className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-purple-600 rounded-full blur-3xl
-                       opacity-40"
-            animate={{
-              x: [-50, 50, -50],
-              y: [-20, 20, -20],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: 30,
-              repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut",
-            }} />
-          <motion.div
-            className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-fuchsia-600 rounded-full
-                       blur-3xl opacity-40"
-            animate={{
-              x: [50, -50, 50],
-              y: [20, -20, 20],
-              scale: [1, 1.3, 1],
-            }}
-            transition={{
-              duration: 40,
-              repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut",
-            }} />
-          <motion.div
-            className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-indigo-700 rounded-full blur-3xl
-                       opacity-30"
-            animate={{
-              x: [20, -20, 20],
-              y: [-30, 30, -30],
-              rotate: [0, 360, 0],
-            }}
-            transition={{
-              duration: 50,
-              repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut",
-            }} />
+        <motion.div className="absolute inset-0 mix-blend-screen" initial={{ opacity: 0 }} 
+                animate={{ opacity: 1 }} transition={{ duration: 1, ease: "easeInOut" }}
+        >
+          <motion.div className="absolute -top-1/4 -left-1/4 w-1/2 h-1/2 bg-purple-600 rounded-full
+                                 blur-3xl opacity-40"
+                      animate={{
+                        x: [-50, 50, -50],
+                        y: [-20, 20, -20],
+                        scale: [1, 1.2, 1],
+                      }}
+                      transition={{
+                        duration: 30,
+                        repeat: Infinity,
+                        repeatType: "mirror",
+                        ease: "easeInOut",
+                      }}
+          />
+          <motion.div className="absolute -bottom-1/4 -right-1/4 w-1/2 h-1/2 bg-fuchsia-600
+                                 rounded-full blur-3xl opacity-40"
+                      animate={{
+                        x: [50, -50, 50],
+                        y: [20, -20, 20],
+                        scale: [1, 1.3, 1],
+                      }}
+                      transition={{
+                        duration: 40,
+                        repeat: Infinity,
+                        repeatType: "mirror",
+                        ease: "easeInOut",
+                      }}
+          />
+          <motion.div className="absolute top-1/3 left-1/3 w-1/3 h-1/3 bg-indigo-700 rounded-full
+                                 blur-3xl opacity-30"
+                      animate={{
+                        x: [20, -20, 20],
+                        y: [-30, 30, -30],
+                        rotate: [0, 360, 0],
+                      }}
+                      transition={{
+                        duration: 50,
+                        repeat: Infinity,
+                        repeatType: "mirror",
+                        ease: "easeInOut",
+                      }}
+          />
         </motion.div>
 
         { /* Twinkling stars */ }
         { stars.map((star, i) => (
-          <motion.div
-            key={ i }
-            className="absolute w-0.5 h-0.5 bg-white rounded-full"
-            initial={{
-              x: star.x,
-              y: star.y,
-              opacity: 0,
-            }}
-            animate={{
-              opacity: [0, star.peakOpacity, 0],
-            }}
-            transition={{
-              duration: star.duration,
-              repeat: Infinity,
-              delay: star.delay,
-            }} />
+          <motion.div key={ i } className="absolute w-0.5 h-0.5 bg-white rounded-full"
+                      initial={{
+                        x: star.x,
+                        y: star.y,
+                        opacity: 0,
+                      }}
+                      animate={{
+                        opacity: [0, star.peakOpacity, 0],
+                      }}
+                      transition={{
+                        duration: star.duration,
+                        repeat: Infinity,
+                        delay: star.delay,
+                      }}
+          />
         ))}
       </div>
 

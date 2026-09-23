@@ -23,7 +23,8 @@ export function LoginPage() {
 
         { /* Auth card footer (sign up). */ }
         <AuthCardFooter message="Don't have an account?" linkMessage="Sign Up instead."
-                        link="/signup" />
+                        link="/signup"
+        />
       </AuthCard>
     </DottyBeams>
   );

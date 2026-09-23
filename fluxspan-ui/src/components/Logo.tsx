@@ -9,13 +9,17 @@ export function Logo({ className, textClassName }: LogoProps) {
   return (
     <div className="flex items-center select-none">
       <svg className={ cn("h-8 w-auto", className) } viewBox="0 0 206 37" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+              xmlns="http://www.w3.org/2000/svg"
+      >
         <path d="M41.5283 18.64L73.5283 4.64" stroke="#10B981"
-                stroke-opacity="0.6" stroke-width="2"/>
+                stroke-opacity="0.6" stroke-width="2"
+        />
         <path d="M30.5283 1.64L42.5283 17.64" stroke="#F43F5E"
-                stroke-opacity="0.6" stroke-width="2"/>
+                stroke-opacity="0.6" stroke-width="2"
+        />
         <path d="M0.528302 28.64L16.1674 18.909C16.2669 18.8471 16.3547 18.7682 16.4269
-                 18.6759L30.5283 0.64" stroke="#10B981" stroke-opacity="0.6" stroke-width="2"/>
+                 18.6759L30.5283 0.64" stroke="#10B981" stroke-opacity="0.6" stroke-width="2"
+        />
         <path d="M18.0283
                  1.512V5.58H7.5523V12.024H15.5803V16.02H7.5523V26.64H2.5123V1.512H18.0283ZM26.6421
                  0V26.64H21.6021V0H26.6421ZM50.4497 6.696V26.64H45.3737V24.12C44.7257 24.984 43.8737
@@ -77,7 +81,8 @@ export function Logo({ className, textClassName }: LogoProps) {
                  15.624V26.64H166.622V6.696H171.662V9.18C172.334 8.316 173.186 7.644 174.218
                  7.164C175.274 6.66 176.426 6.408 177.674 6.408ZM191.142 5.76H197.514L205.362
                  13.824L197.514 21.888H191.142L199.026 13.824L191.142 5.76Z"
-            className={ cn("fill-slate-900", textClassName) }/>
+            className={ cn("fill-slate-900", textClassName) }
+        />
       </svg>
     </div>
   );
