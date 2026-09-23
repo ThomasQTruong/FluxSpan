@@ -1,5 +1,3 @@
-import { DottyBeams } from '@/components/backgrounds/DottyBeams';
-import { Navbar } from '@/components/Navbar';
 import { AuthCard } from '@/components/auth/AuthCard';
 import { LoginForm } from '@/components/auth/LoginForm';
 import { SocialAuth } from '@/components/auth/SocialAuth';
@@ -7,27 +5,24 @@ import { AuthCardFooter } from '@/components/auth/AuthCardFooter';
 
 export function LoginPage() {
   return (
-    <DottyBeams className="bg-slate-300">
-      <Navbar />
-      <AuthCard>
-        {/* Auth title. */}
-        <div className="mb-4 text-2xl sm:mb-8 sm:text-4xl">
-          <span className="font-bold">Sign In</span>
-        </div>
+    <AuthCard>
+      {/* Auth title. */}
+      <div className="mb-4 text-2xl sm:mb-8 sm:text-4xl">
+        <span className="font-bold">Sign In</span>
+      </div>
 
-        {/* Login form option. */}
-        <LoginForm />
+      {/* Login form option. */}
+      <LoginForm />
 
-        {/* Social auth option(s). */}
-        <SocialAuth message="Or Sign In With:" />
+      {/* Social auth option(s). */}
+      <SocialAuth message="Or Sign In With:" />
 
-        {/* Auth card footer (sign up). */}
-        <AuthCardFooter
-          message="Don't have an account?"
-          linkMessage="Sign Up instead."
-          link="/signup"
-        />
-      </AuthCard>
-    </DottyBeams>
+      {/* Auth card footer (sign up). */}
+      <AuthCardFooter
+        message="Don't have an account?"
+        linkMessage="Sign Up instead."
+        link="/signup"
+      />
+    </AuthCard>
   );
 }
