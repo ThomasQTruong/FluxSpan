@@ -17,21 +17,21 @@ export function Logo({ className, textClassName }: LogoProps) {
         <path
           d="M41.5283 18.64L73.5283 4.64"
           stroke="#10B981"
-          stroke-opacity="0.6"
-          stroke-width="2"
+          strokeOpacity="0.6"
+          strokeWidth="2"
         />
         <path
           d="M30.5283 1.64L42.5283 17.64"
           stroke="#F43F5E"
-          stroke-opacity="0.6"
-          stroke-width="2"
+          strokeOpacity="0.6"
+          strokeWidth="2"
         />
         <path
           d="M0.528302 28.64L16.1674 18.909C16.2669 18.8471 16.3547 18.7682 16.4269
              18.6759L30.5283 0.64"
           stroke="#10B981"
-          stroke-opacity="0.6"
-          stroke-width="2"
+          strokeOpacity="0.6"
+          strokeWidth="2"
         />
         <path
           d="M18.0283
