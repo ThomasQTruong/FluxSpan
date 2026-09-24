@@ -40,7 +40,7 @@ export function SignUpForm() {
   // The submit handler only runs if validation passes.
   const onSubmit = async (data: signUpFormValues) => {
     // 'data' is 100% type-safe here. Ready to send to the FluxSpan backend.
-    console.log('Submission data', data);
+    console.log('SignUp data', data);
 
     // Example: await fetch('/api/signup', { method: 'POST', body: JSON.stringify(data) });
   };
@@ -84,7 +84,7 @@ export function SignUpForm() {
             id="password"
             autoComplete="new-password"
             className={cn(
-              'w-full rounded-md border p-2 transition-colors duration-300 ease-in-out outline-none hover:border-gray-700 hover:bg-gray-100 focus:ring-1',
+              'w-full rounded-md border p-2 transition-colors duration-300 ease-in-out outline-none hover:bg-gray-100 focus:ring-1',
               errors.password
                 ? 'border-red-500 focus:ring-red-500'
                 : 'border-black focus:ring-gray-500'
@@ -108,7 +108,7 @@ export function SignUpForm() {
             id="confirmPassword"
             autoComplete="new-password"
             className={cn(
-              'w-full rounded-md border p-2 transition-colors duration-300 ease-in-out outline-none hover:border-gray-700 hover:bg-gray-100 focus:ring-1',
+              'w-full rounded-md border p-2 transition-colors duration-300 ease-in-out outline-none hover:bg-gray-100 focus:ring-1',
               errors.confirmPassword
                 ? 'border-red-500 focus:ring-red-500'
                 : 'border-black focus:ring-gray-500'
