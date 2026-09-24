@@ -20,7 +20,7 @@ const signUpSchema = z
   });
 
 // Automatically infer the TypeScript type from the Zod schema.
-type signUpFormValues = z.infer<typeof signUpSchema>;
+type SignUpFormValues = z.infer<typeof signUpSchema>;
 
 export function SignUpForm() {
   // Initialize the form with the Zod resolver.
@@ -28,7 +28,7 @@ export function SignUpForm() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<signUpFormValues>({
+  } = useForm<SignUpFormValues>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
       email: '',
@@ -38,7 +38,7 @@ export function SignUpForm() {
   });
 
   // The submit handler only runs if validation passes.
-  const onSubmit = async (data: signUpFormValues) => {
+  const onSubmit = async (data: SignUpFormValues) => {
     // 'data' is 100% type-safe here. Ready to send to the FluxSpan backend.
     console.log('SignUp data', data);
 

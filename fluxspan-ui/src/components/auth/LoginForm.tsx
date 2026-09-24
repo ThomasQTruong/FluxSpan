@@ -10,7 +10,7 @@ const loginSchema = z.object({
   rememberMe: z.boolean(),
 });
 
-type loginFormValues = z.infer<typeof loginSchema>;
+type LoginFormValues = z.infer<typeof loginSchema>;
 
 export function LoginForm() {
   const {
@@ -18,7 +18,7 @@ export function LoginForm() {
     handleSubmit,
     setError,
     formState: { errors, isSubmitting },
-  } = useForm<loginFormValues>({
+  } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
       email: '',
@@ -27,7 +27,7 @@ export function LoginForm() {
     },
   });
 
-  const onSubmit = async (data: loginFormValues) => {
+  const onSubmit = async (data: LoginFormValues) => {
     try {
       console.log('Login data', data);
     } catch {
