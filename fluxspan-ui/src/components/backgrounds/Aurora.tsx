@@ -1,7 +1,7 @@
 // https://21st.dev/@dhileepkumargm/components/aurora-background
 
 import React from 'react';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils';
 import { motion } from 'motion/react';
 
 export interface AuroraBackgroundProps {

@@ -1,7 +1,7 @@
 // https://21st.dev/@jatin-yadav05/components/elegant-dark-pattern
 
 import type React from 'react';
-import { cn } from '@/utils/cn';
+import { cn } from '@/utils';
 import bgImage from '@/assets/DottyBeamsBg.png';
 
 interface DottyBeamsProps {

@@ -1,5 +1,5 @@
-import { DashboardCard } from '@/features/dashboard/components/DashboardCard';
-import { cn } from '@/utils/cn';
+import { DashboardCard } from './DashboardCard';
+import { cn } from '@/utils';
 
 interface DashboardGridProps {
   className?: string;
