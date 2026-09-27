@@ -1,6 +1,6 @@
 import { Logo } from '@/components/Logo';
 import { Link } from 'react-router-dom';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils/cn';
 
 interface NavbarProps {
   logoClassName?: string;

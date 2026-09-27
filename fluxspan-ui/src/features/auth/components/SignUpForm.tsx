@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils';
 
 // Define the validation schema outside the component to prevent recreation on re-renders.
 const signUpSchema = z

@@ -1,7 +1,9 @@
-import { AuthCard } from '@/components/auth/AuthCard';
-import { LoginForm } from '@/components/auth/LoginForm';
-import { SocialAuth } from '@/components/auth/SocialAuth';
-import { AuthCardFooter } from '@/components/auth/AuthCardFooter';
+import {
+  AuthCard,
+  AuthCardFooter,
+  LoginForm,
+  SocialAuth,
+} from '@/features/auth';
 
 export function LoginPage() {
   return (

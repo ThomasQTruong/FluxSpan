@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
-import { cn } from '@/lib/utils';
+import { cn } from '@/utils';
 import { Link } from 'react-router-dom';
 
 const loginSchema = z.object({
