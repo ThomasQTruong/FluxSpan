@@ -48,20 +48,20 @@ export type LoginFormValues = z.infer<typeof loginSchema>;
 // -----------------------------------------------------------------------------
 // Forgot-Password Schema & Types
 // -----------------------------------------------------------------------------
-export const forgotPasswordFormSchema = z.object({
+export const forgotPasswordSchema = z.object({
   email: emailSchema,
 });
 
-export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordFormSchema>;
+export type ForgotPasswordFormValues = z.infer<typeof forgotPasswordSchema>;
 
 // -----------------------------------------------------------------------------
 // Reset-Password Schema & Types
 // -----------------------------------------------------------------------------
-export const resetPasswordFormSchema = z
+export const resetPasswordSchema = z
   .object({
     password: passwordPolicySchema,
     confirmPassword: z.string(),
   })
   .refine(passwordsMatch, passwordMatchConfig);
 
-export type ResetPasswordFormValues = z.infer<typeof resetPasswordFormSchema>;
+export type ResetPasswordFormValues = z.infer<typeof resetPasswordSchema>;
