@@ -20,7 +20,7 @@ export function PasswordField() {
         {...register('password')}
         type="password"
         id="password"
-        autoComplete="new-password"
+        autoComplete="current-password"
         className={cn(
           'w-full rounded-md border p-2 transition-colors duration-300 ease-in-out outline-none hover:bg-gray-100 focus:ring-1',
           errors.password
