@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { signUpSchema, type SignUpFormValues } from '../schemas';
 import { EmailField } from './EmailField';
 import { NewPasswordFields } from './NewPasswordFields';
+import { SubmitButton } from './SubmitButton';
 
 export function SignUpForm() {
   // Initialize the form with the Zod resolver.
@@ -15,10 +16,7 @@ export function SignUpForm() {
     },
   });
 
-  const {
-    handleSubmit,
-    formState: { isSubmitting },
-  } = methods;
+  const { handleSubmit } = methods;
 
   // The submit handler only runs if validation passes.
   const onSubmit = async (data: SignUpFormValues) => {
@@ -43,13 +41,7 @@ export function SignUpForm() {
         </div>
 
         {/* Submit button. */}
-        <button
-          disabled={isSubmitting}
-          type="submit"
-          className="w-full rounded-4xl bg-cyan-500/60 p-2 transition-colors duration-300 ease-in-out hover:bg-cyan-500/75"
-        >
-          {isSubmitting ? 'Creating...' : 'Create'}
-        </button>
+        <SubmitButton text="Create" onClickText="Creating..." />
       </form>
     </FormProvider>
   );

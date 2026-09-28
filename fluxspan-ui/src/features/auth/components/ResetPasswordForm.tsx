@@ -2,6 +2,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { resetPasswordSchema, type ResetPasswordFormValues } from '../schemas';
 import { NewPasswordFields } from './NewPasswordFields';
+import { SubmitButton } from './SubmitButton';
 
 export function ResetPasswordForm() {
   const methods = useForm<ResetPasswordFormValues>({
@@ -12,11 +13,7 @@ export function ResetPasswordForm() {
     },
   });
 
-  const {
-    handleSubmit,
-    setError,
-    formState: { isSubmitting },
-  } = methods;
+  const { handleSubmit, setError } = methods;
 
   const onSubmit = async (data: ResetPasswordFormValues) => {
     try {
@@ -38,13 +35,7 @@ export function ResetPasswordForm() {
         <NewPasswordFields />
 
         {/* Submit button. */}
-        <button
-          disabled={isSubmitting}
-          type="submit"
-          className="w-full rounded-4xl bg-cyan-500/60 p-2 transition-colors duration-300 ease-in-out hover:bg-cyan-500/75"
-        >
-          {isSubmitting ? 'Reset...' : 'Reset'}
-        </button>
+        <SubmitButton text="Reset" onClickText="Reset..." />
       </form>
     </FormProvider>
   );

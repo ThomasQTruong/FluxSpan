@@ -5,6 +5,7 @@ import {
   type ForgotPasswordFormValues,
 } from '../schemas';
 import { EmailField } from './EmailField';
+import { SubmitButton } from './SubmitButton';
 
 export function ForgotPasswordForm() {
   const methods = useForm<ForgotPasswordFormValues>({
@@ -14,11 +15,7 @@ export function ForgotPasswordForm() {
     },
   });
 
-  const {
-    handleSubmit,
-    setError,
-    formState: { isSubmitting },
-  } = methods;
+  const { handleSubmit, setError } = methods;
 
   const onSubmit = async (data: ForgotPasswordFormValues) => {
     try {
@@ -41,13 +38,7 @@ export function ForgotPasswordForm() {
         <EmailField />
 
         {/* Submit button. */}
-        <button
-          disabled={isSubmitting}
-          type="submit"
-          className="w-full rounded-4xl bg-cyan-500/60 p-2 transition-colors duration-300 ease-in-out hover:bg-cyan-500/75"
-        >
-          {isSubmitting ? 'Submitting...' : 'Submit'}
-        </button>
+        <SubmitButton />
       </form>
     </FormProvider>
   );

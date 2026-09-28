@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { loginSchema, type LoginFormValues } from '../schemas';
 import { EmailField } from './EmailField';
 import { PasswordField } from './PasswordField';
+import { SubmitButton } from './SubmitButton';
 
 export function LoginForm() {
   const methods = useForm<LoginFormValues>({
@@ -15,12 +16,7 @@ export function LoginForm() {
     },
   });
 
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { isSubmitting },
-  } = methods;
+  const { register, handleSubmit, setError } = methods;
 
   const onSubmit = async (data: LoginFormValues) => {
     try {
@@ -65,13 +61,7 @@ export function LoginForm() {
           </Link>
         </div>
         {/* Submit button. */}
-        <button
-          disabled={isSubmitting}
-          type="submit"
-          className="w-full rounded-4xl bg-cyan-500/60 p-2 transition-colors duration-300 ease-in-out hover:bg-cyan-500/75"
-        >
-          {isSubmitting ? 'Logging In...' : 'Log In'}
-        </button>
+        <SubmitButton text="Log In" onClickText="Logging In..." />
       </form>
     </FormProvider>
   );
