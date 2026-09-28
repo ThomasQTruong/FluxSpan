@@ -5,12 +5,12 @@ interface NewPasswordFieldsProps {
   className?: string;
 }
 
-export function NewPasswordFields({ className }: NewPasswordFieldsProps) {
-  interface NewPasswordFormFields {
-    password: string;
-    confirmPassword: string;
-  }
+interface NewPasswordFormFields {
+  password: string;
+  confirmPassword: string;
+}
 
+export function NewPasswordFields({ className }: NewPasswordFieldsProps) {
   const {
     register,
     formState: { errors },

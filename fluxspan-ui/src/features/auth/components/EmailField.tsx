@@ -1,11 +1,11 @@
 import { useFormContext } from 'react-hook-form';
 import { cn } from '@/utils';
 
-export function EmailField() {
-  interface EmailFormField {
-    email: string;
-  }
+interface EmailFormField {
+  email: string;
+}
 
+export function EmailField() {
   const {
     register,
     formState: { errors },

@@ -1,11 +1,11 @@
 import { useFormContext } from 'react-hook-form';
 import { cn } from '@/utils';
 
-export function PasswordField() {
-  interface PasswordFormField {
-    password: string;
-  }
+interface PasswordFormField {
+  password: string;
+}
 
+export function PasswordField() {
   const {
     register,
     formState: { errors },
