@@ -5,6 +5,7 @@ import { SignUpPage } from '@/pages/SignUpPage';
 import { LandingPage } from '@/pages/LandingPage';
 import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 import { MainLayout } from '@/layouts/MainLayout';
+import { ResetPasswordPage } from './pages/ResetPasswordPage';
 
 const router = createBrowserRouter([
   {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/reset-password',
-        element: <SignUpPage />,
+        element: <ResetPasswordPage />,
       },
     ],
   },
