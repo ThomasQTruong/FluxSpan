@@ -1,1 +1,1 @@
-export { DashboardGrid } from './components/DashboardGrid';
+export { Grid } from './components/Grid';

@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react';
 
-interface DashboardCardProps {
+interface CardProps {
   title?: string;
   children?: ReactNode;
 }
 
-export function DashboardCard({ title, children }: DashboardCardProps) {
+export function Card({ title, children }: CardProps) {
   return (
     // The card.
     <div className="backdrop-blur-4xl rounded-xl border border-white/20 bg-white/40 shadow-lg backdrop-saturate-150">
