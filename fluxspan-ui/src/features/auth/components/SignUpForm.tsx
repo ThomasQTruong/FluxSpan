@@ -1,26 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { cn } from '@/utils';
-
-// Define the validation schema outside the component to prevent recreation on re-renders.
-const signUpSchema = z
-  .object({
-    email: z.email({ error: 'Please enter a valid email address.' }),
-    password: z
-      .string()
-      .min(10, 'Password must be at least 10 characters long.')
-      .max(128, 'Password cannot exceed 128 characters.'),
-    confirmPassword: z.string(),
-  })
-  // Check if confirmPassword matches password.
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match.',
-    path: ['confirmPassword'],
-  });
-
-// Automatically infer the TypeScript type from the Zod schema.
-type SignUpFormValues = z.infer<typeof signUpSchema>;
+import { signUpSchema, type SignUpFormValues } from '../schemas';
 
 export function SignUpForm() {
   // Initialize the form with the Zod resolver.

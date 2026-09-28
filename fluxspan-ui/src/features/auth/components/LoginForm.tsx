@@ -1,16 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 import { cn } from '@/utils';
 import { Link } from 'react-router-dom';
-
-const loginSchema = z.object({
-  email: z.email({ error: 'Please enter a valid email address.' }),
-  password: z.string().min(1, 'Password is required.'),
-  rememberMe: z.boolean(),
-});
-
-type LoginFormValues = z.infer<typeof loginSchema>;
+import { loginSchema, type LoginFormValues } from '../schemas';
 
 export function LoginForm() {
   const {
