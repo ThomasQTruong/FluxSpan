@@ -1,13 +1,8 @@
-import {
-  AuthCard,
-  AuthCardFooter,
-  LoginForm,
-  SocialAuth,
-} from '@/features/auth';
+import { Card, CardFooter, LoginForm, SocialAuth } from '@/features/auth';
 
 export function LoginPage() {
   return (
-    <AuthCard>
+    <Card>
       {/* Auth title. */}
       <div className="mb-4 text-2xl sm:mb-8 sm:text-4xl">
         <span className="font-bold">Sign In</span>
@@ -20,11 +15,11 @@ export function LoginPage() {
       <SocialAuth message="Or Sign In With:" />
 
       {/* Auth card footer (sign up). */}
-      <AuthCardFooter
+      <CardFooter
         message="Don't have an account?"
         linkMessage="Sign Up instead."
         link="/signup"
       />
-    </AuthCard>
+    </Card>
   );
 }

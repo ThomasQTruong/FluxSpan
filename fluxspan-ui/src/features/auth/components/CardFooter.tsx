@@ -1,16 +1,16 @@
 import { Link } from 'react-router-dom';
 
-interface AuthCardFooterProps {
+interface CardFooterProps {
   message?: string;
   linkMessage?: string;
   link?: string;
 }
 
-export function AuthCardFooter({
+export function CardFooter({
   message,
   linkMessage,
   link = './',
-}: AuthCardFooterProps) {
+}: CardFooterProps) {
   return (
     <div className="w-full">
       <hr className="mdt:m-4 mt-2 w-full border-gray-300" />

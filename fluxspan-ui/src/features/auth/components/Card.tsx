@@ -1,12 +1,12 @@
 import { cn } from '@/utils';
 import type { ReactNode } from 'react';
 
-interface AuthCardProps {
+interface CardProps {
   className?: string;
   children?: ReactNode;
 }
 
-export function AuthCard({ className, children }: AuthCardProps) {
+export function Card({ className, children }: CardProps) {
   return (
     // Page container.
     <div

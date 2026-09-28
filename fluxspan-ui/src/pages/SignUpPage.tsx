@@ -1,13 +1,8 @@
-import {
-  AuthCard,
-  AuthCardFooter,
-  SignUpForm,
-  SocialAuth,
-} from '@/features/auth';
+import { Card, CardFooter, SignUpForm, SocialAuth } from '@/features/auth';
 
 export function SignUpPage() {
   return (
-    <AuthCard>
+    <Card>
       {/* Auth title. */}
       <div className="mb-4 text-2xl sm:mb-8 sm:text-4xl">
         <span className="font-bold">Sign Up</span>
@@ -20,11 +15,11 @@ export function SignUpPage() {
       <SocialAuth message="Or Sign Up With:" />
 
       {/* Auth card footer (sign in). */}
-      <AuthCardFooter
+      <CardFooter
         message="Already have an account?"
         linkMessage="Sign In instead."
         link="/login"
       />
-    </AuthCard>
+    </Card>
   );
 }

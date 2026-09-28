@@ -1,8 +1,8 @@
-import { AuthCard, AuthCardFooter, ForgotPasswordForm } from '@/features/auth';
+import { Card, CardFooter, ForgotPasswordForm } from '@/features/auth';
 
 export function ForgotPasswordPage() {
   return (
-    <AuthCard>
+    <Card>
       {/* Auth title. */}
       <div className="mb-4 text-2xl sm:mb-8 sm:text-4xl">
         <span className="font-bold">Forgot Password</span>
@@ -12,7 +12,7 @@ export function ForgotPasswordPage() {
       <ForgotPasswordForm />
 
       {/* Card footer. */}
-      <AuthCardFooter message="" linkMessage="Back to Login." link="/login" />
-    </AuthCard>
+      <CardFooter message="" linkMessage="Back to Login." link="/login" />
+    </Card>
   );
 }

@@ -1,8 +1,8 @@
-import { AuthCard, AuthCardFooter, ResetPasswordForm } from '@/features/auth';
+import { Card, CardFooter, ResetPasswordForm } from '@/features/auth';
 
 export function ResetPasswordPage() {
   return (
-    <AuthCard>
+    <Card>
       {/* Auth title. */}
       <div className="mb-4 text-2xl sm:mb-8 sm:text-4xl">
         <span className="font-bold">Reset Password</span>
@@ -12,7 +12,7 @@ export function ResetPasswordPage() {
       <ResetPasswordForm />
 
       {/* Card footer. */}
-      <AuthCardFooter message="" linkMessage="Back to Login." link="/login" />
-    </AuthCard>
+      <CardFooter message="" linkMessage="Back to Login." link="/login" />
+    </Card>
   );
 }
