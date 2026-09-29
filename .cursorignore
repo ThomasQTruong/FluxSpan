@@ -1,0 +1,62 @@
+# Dependencies & Virtual Environments
+node_modules/
+.venv/
+venv/
+vendor/
+__pycache__/
+*.pyc
+*.pyo
+
+# Build & Output Bundles
+dist/
+build/
+.next/
+out/
+bin/
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Lockfiles (Massive token sink)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+Cargo.lock
+go.sum
+
+# Auto-Generated gRPC / Protobuf (AI only needs .proto files)
+*_pb2.py
+*_pb2_grpc.py
+*_pb2.pyi
+*.pb.go
+*_grpc.pb.go
+
+# Tooling, Test & Compiler Caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vite/
+.coverage
+htmlcov/
+*.out
+*.test
+
+# Local Container & Database Storage
+pgdata/
+postgres-data/
+.docker/
+
+# Binary & Media Files
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.ico
+*.wasm
+
+# Version Control, Local Databases & Logs
+.git/
+*.log
+*.sqlite
+*.db
