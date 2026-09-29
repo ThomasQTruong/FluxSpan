@@ -1,3 +1,20 @@
-.env
+# Virtual Environments (Local environment folder created by uv)
+.venv/
+venv/
+
+# Byte-compiled / Python Caches
+__pycache__/
+*.py[cod]
+
+# Testing & Tooling Caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# OS-Specific Metadata
 .DS_Store
 Thumbs.db
+
+# Secrets & Local Envs
+.env

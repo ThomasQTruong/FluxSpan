@@ -1,0 +1,17 @@
+[project]
+name = "fluxspan-api"
+version = "0.1.0"
+description = "FastAPI Backend for FluxSpan"
+authors = [
+    { name = "Thomas Truong", email = "TruongThomasQ@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.141.1",
+    "passlib[bcrypt]>=1.7.4",
+    "pydantic-settings>=2.15.0",
+    "pyjwt[crypto]>=2.15.1",
+]
+
+[tool.uv]
+package = false
