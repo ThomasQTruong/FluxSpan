@@ -1,7 +1,11 @@
+"""Configuration settings for the FluxSpan API application."""
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    """Configuration class for FluxSpan API settings."""
+
     PROJECT_NAME: str = "FluxSpan API"
     API_V1_STR: str = "/api/v1"
 
