@@ -9,5 +9,8 @@
       "mode": "auto"
     }
   ],
-  "python-envs.defaultEnvManager": "ms-python.python:system"
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "pylint.args": [
+    "--init-hook=import sys; sys.path.append('${workspaceFolder}/fluxspan-api')"
+  ]
 }
