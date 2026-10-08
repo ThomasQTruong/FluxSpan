@@ -1,5 +1,7 @@
 """Unit tests for security utilities (password hashing and JWT management)."""
 
+# pylint: disable=missing-function-docstring
+
 from datetime import timedelta
 
 import jwt
@@ -13,7 +15,7 @@ from app.core.security import (
 )
 
 
-def test_password_hashing_success():  # pylint: disable=missing-function-docstring
+def test_password_hashing_success():
     raw_password = "MySecurePassword123!"
     hashed_password = get_password_hash(raw_password)
 
@@ -22,14 +24,14 @@ def test_password_hashing_success():  # pylint: disable=missing-function-docstri
     assert verify_password(raw_password, hashed_password) is True
 
 
-def test_password_verification_failure():  # pylint: disable=missing-function-docstring
+def test_password_verification_failure():
     raw_password = "MySecurePassword123!"
     hashed_password = get_password_hash(raw_password)
 
     assert verify_password("WrongPassword!", hashed_password) is False
 
 
-def test_create_and_decode_access_token():  # pylint: disable=missing-function-docstring
+def test_create_and_decode_access_token():
     subject = "usr_01HXYZ"
     claims = {"role": "admin"}
 
@@ -43,7 +45,7 @@ def test_create_and_decode_access_token():  # pylint: disable=missing-function-d
     assert "iat" in payload
 
 
-def test_decode_expired_token():  # pylint: disable=missing-function-docstring
+def test_decode_expired_token():
     # Force immediate expiration
     expired_token = create_access_token(
         subject="usr_expired",
@@ -54,7 +56,7 @@ def test_decode_expired_token():  # pylint: disable=missing-function-docstring
         decode_access_token(expired_token)
 
 
-def test_decode_invalid_signature():  # pylint: disable=missing-function-docstring
+def test_decode_invalid_signature():
     token = create_access_token(subject="usr_tampered")
     tampered_token = token[:-5] + "XXXXX"
 
