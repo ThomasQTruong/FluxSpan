@@ -1,9 +1,10 @@
 """gRPC client connection management for Go core engine communication."""
 
 import logging
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
 import grpc.aio
+
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)

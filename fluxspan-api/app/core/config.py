@@ -1,6 +1,7 @@
 """Configuration settings for the FluxSpan API application."""
 
 from pathlib import Path
+
 from pydantic import computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -19,7 +20,7 @@ class Settings(BaseSettings):
     # Generate a secure key in terminal using: openssl rand -hex 32
     JWT_SECRET_KEY: str
     JWT_ALGORITHM: str = "HS256"
-    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 15  # 15 minutes
 
     # gRPC Downstream Target (Go Core Engine)
     GO_GRPC_HOST: str = "localhost"
