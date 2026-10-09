@@ -48,6 +48,17 @@ async def test_register_and_login() -> None:
         assert "access_token" in refresh_data
         assert refresh_data["token_type"] == "bearer"
 
+        # Test GET /me with access token
+        access_token = token_data["access_token"]
+        response = await ac.get(
+            "/api/v1/auth/me",
+            headers={"Authorization": f"Bearer {access_token}"},
+        )
+        assert response.status_code == 200
+        me_data = response.json()
+        assert me_data["email"] == "integration@example.com"
+        assert "id" in me_data
+
 
 @pytest.mark.anyio
 async def test_login_invalid_credentials() -> None:

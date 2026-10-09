@@ -5,6 +5,7 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
+from app.api.deps import get_current_user
 from app.core.security import (
     create_access_token,
     create_refresh_token,
@@ -87,3 +88,23 @@ async def refresh_access_token(body: RefreshTokenRequest) -> Token:
 
     access_token = create_access_token(subject=user_id)
     return Token(access_token=access_token, token_type="bearer")
+
+
+@router.get("/me", response_model=UserResponse)
+async def read_current_user(
+    current_user_id: Annotated[str, Depends(get_current_user)],
+) -> UserResponse:
+    """Retrieve details of the currently authenticated user."""
+    # Find user by ID in mock database
+    for user_data in _USER_DB.values():
+        if user_data["id"] == current_user_id:
+            return UserResponse(
+                id=user_data["id"],
+                email=user_data["email"],
+                is_active=True,
+            )
+
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="User not found",
+    )
