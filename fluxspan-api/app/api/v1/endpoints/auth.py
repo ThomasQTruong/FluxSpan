@@ -5,8 +5,14 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from app.core.security import create_access_token, get_password_hash, verify_password
-from app.schemas.token import Token
+from app.core.security import (
+    create_access_token,
+    create_refresh_token,
+    decode_refresh_token,
+    get_password_hash,
+    verify_password,
+)
+from app.schemas.token import RefreshTokenRequest, Token
 from app.schemas.user import UserCreate, UserResponse
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
@@ -55,4 +61,29 @@ async def login(
         )
 
     access_token = create_access_token(subject=user["id"])
+    refresh_token = create_refresh_token(subject=user["id"])
+    return Token(
+        access_token=access_token,
+        refresh_token=refresh_token,
+        token_type="bearer",
+    )
+
+
+@router.post("/refresh", response_model=Token)
+async def refresh_access_token(body: RefreshTokenRequest) -> Token:
+    """Exchange a valid refresh token for a new access token."""
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate refresh token",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = decode_refresh_token(body.refresh_token)
+        user_id = payload.get("sub")
+        if user_id is None:
+            raise credentials_exception
+    except Exception as exc:
+        raise credentials_exception from exc
+
+    access_token = create_access_token(subject=user_id)
     return Token(access_token=access_token, token_type="bearer")

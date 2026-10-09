@@ -33,7 +33,20 @@ async def test_register_and_login() -> None:
         assert response.status_code == 200
         token_data = response.json()
         assert "access_token" in token_data
+        assert "refresh_token" in token_data
         assert token_data["token_type"] == "bearer"
+
+        refresh_token = token_data["refresh_token"]
+
+        # Test token refresh
+        response = await ac.post(
+            "/api/v1/auth/refresh",
+            json={"refresh_token": refresh_token},
+        )
+        assert response.status_code == 200
+        refresh_data = response.json()
+        assert "access_token" in refresh_data
+        assert refresh_data["token_type"] == "bearer"
 
 
 @pytest.mark.anyio

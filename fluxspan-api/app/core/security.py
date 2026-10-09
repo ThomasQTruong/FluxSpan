@@ -58,11 +58,60 @@ def decode_access_token(token: str) -> dict[str, Any]:
     """Decode and validate a JWT access token signature and claims.
 
     Raises:
-        jwt.PyJWTError: If the token signature is invalid or expired.
+        jwt.PyJWTError: If the token signature is invalid, expired, or incorrect type.
     """
     payload: dict[str, Any] = jwt.decode(
         token,
         settings.JWT_SECRET_KEY,
         algorithms=[settings.JWT_ALGORITHM],
     )
+    if payload.get("type") != "access":
+        raise jwt.PyJWTError("Invalid token type for access token")
+    return payload
+
+
+def create_refresh_token(
+    subject: str | Any,
+    expires_delta: timedelta | None = None,
+    extra_claims: dict[str, Any] | None = None,
+) -> str:
+    """Encode a JWT refresh token with user identification and expiry context."""
+    now = datetime.now(UTC)
+
+    if expires_delta:
+        expire = now + expires_delta
+    else:
+        expire = now + timedelta(days=settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS)
+
+    payload: dict[str, Any] = {
+        "sub": str(subject),
+        "iat": int(now.timestamp()),
+        "exp": int(expire.timestamp()),
+        "type": "refresh",
+    }
+
+    if extra_claims:
+        payload.update(extra_claims)
+
+    encoded_jwt: str = jwt.encode(
+        payload,
+        settings.JWT_SECRET_KEY,
+        algorithm=settings.JWT_ALGORITHM,
+    )
+    return encoded_jwt
+
+
+def decode_refresh_token(token: str) -> dict[str, Any]:
+    """Decode and validate a JWT refresh token signature and claims.
+
+    Raises:
+        jwt.PyJWTError: If the token signature is invalid, expired, or incorrect type.
+    """
+    payload: dict[str, Any] = jwt.decode(
+        token,
+        settings.JWT_SECRET_KEY,
+        algorithms=[settings.JWT_ALGORITHM],
+    )
+    if payload.get("type") != "refresh":
+        raise jwt.PyJWTError("Invalid token type for refresh token")
     return payload
