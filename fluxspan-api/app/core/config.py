@@ -1,8 +1,9 @@
 """Configuration settings for the FluxSpan API application."""
 
 from pathlib import Path
+from typing import Annotated, Any
 
-from pydantic import computed_field
+from pydantic import AnyHttpUrl, BeforeValidator, computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Path to config.py -> core -> app -> fluxspan-api -> FluxSpan (monorepo root)
@@ -10,11 +11,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 ENV_PATH = BASE_DIR / ".env"
 
 
+def parse_cors(v: Any) -> list[str] | str:
+    """Parse CORS origins from string or list."""
+    if isinstance(v, str) and not v.startswith("["):
+        return [i.strip() for i in v.split(",")]
+    if isinstance(v, list):
+        return v
+    return v
+
+
 class Settings(BaseSettings):
     """Configuration class for FluxSpan API settings."""
 
     PROJECT_NAME: str = "FluxSpan API"
     API_V1_STR: str = "/api/v1"
+
+    # CORS Origins
+    BACKEND_CORS_ORIGINS: Annotated[
+        list[AnyHttpUrl] | list[str],
+        BeforeValidator(parse_cors),
+    ] = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+    ]
 
     # Security / JWT Settings
     # Generate a secure key in terminal using: openssl rand -hex 32
