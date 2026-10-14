@@ -17,6 +17,7 @@ dependencies = [
 
 [tool.pylint.main]
 pythonpath = ["."]
+ignored-modules = ["app.grpc.generated"]
 
 [tool.uv]
 package = false
@@ -28,6 +29,7 @@ testpaths = ["app/tests", "tests"]
 [tool.ruff]
 target-version = "py312"
 line-length = 88
+exclude = ["app/grpc/generated/*"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]
