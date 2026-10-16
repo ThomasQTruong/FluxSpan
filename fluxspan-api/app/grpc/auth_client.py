@@ -1,5 +1,7 @@
 """gRPC client wrapper for AuthService communication with Go core engine."""
 
+# pylint: disable=no-member
+
 import logging
 
 import grpc

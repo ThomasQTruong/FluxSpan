@@ -17,7 +17,6 @@ dependencies = [
 
 [tool.pylint.main]
 pythonpath = ["."]
-ignored-modules = ["app.grpc.generated"]
 
 [tool.uv]
 package = false
