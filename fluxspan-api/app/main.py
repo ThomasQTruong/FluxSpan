@@ -55,3 +55,26 @@ async def root() -> RedirectResponse:
 async def health_check() -> dict[str, str]:
     """Simple health check endpoint."""
     return {"status": "ok"}
+
+
+@app.get("/ready", tags=["Health"])
+async def readiness_check() -> dict[str, str]:
+    """Readiness check verifying gRPC channel connection to Go core engine."""
+    if grpc_client_manager.channel is None:
+        return {"status": "not ready", "grpc": "disconnected"}
+    
+    # Check gRPC channel connectivity state
+    state = grpc_client_manager.channel.get_state(try_to_connect=False)
+    # 0 = IDLE, 1 = CONNECTING, 2 = READY, 3 = TRANSIENT_FAILURE, 4 = SHUTDOWN
+    state_str = {
+        0: "idle",
+        1: "connecting",
+        2: "ready",
+        3: "transient_failure",
+        4: "shutdown",
+    }.get(state, "unknown")
+
+    if state in (2, 0, 1):  # READY, IDLE, or CONNECTING are considered alive
+        return {"status": "ready", "grpc": state_str}
+    
+    return {"status": "degraded", "grpc": state_str}

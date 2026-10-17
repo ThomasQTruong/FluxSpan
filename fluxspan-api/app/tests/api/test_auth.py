@@ -111,3 +111,16 @@ async def test_login_invalid_credentials(monkeypatch: pytest.MonkeyPatch) -> Non
             data={"username": "nonexistent@example.com", "password": "WrongPassword!"},
         )
         assert response.status_code == 401
+
+
+@pytest.mark.anyio
+async def test_readiness_probe() -> None:
+    """Test /ready health check endpoint."""
+    async with AsyncClient(
+        transport=ASGITransport(app=app), base_url="http://test"
+    ) as ac, app.router.lifespan_context(app):
+        response = await ac.get("/ready")
+        assert response.status_code == 200
+        data = response.json()
+        assert "status" in data
+        assert "grpc" in data
