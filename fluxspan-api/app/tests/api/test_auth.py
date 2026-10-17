@@ -1,17 +1,33 @@
 """Integration tests for authentication endpoints."""
 
+import grpc
 import pytest
 from httpx import ASGITransport, AsyncClient
 
+from app.grpc.auth_client import AuthgRPCClient
+from app.grpc.generated import auth_pb2
 from app.main import app
 
 
 @pytest.mark.anyio
-async def test_register_and_login() -> None:
-    """Test user registration and OAuth2 login flow."""
+async def test_register_and_login(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Test user registration and OAuth2 login flow with mocked gRPC client."""
+    async def mock_register(self, email: str, password: str) -> auth_pb2.UserResponse:  # pylint: disable=unused-argument
+        return auth_pb2.UserResponse(id="usr_0001", email=email, is_active=True)
+
+    async def mock_login(self, email: str, password: str) -> auth_pb2.TokenResponse:  # pylint: disable=unused-argument
+        return auth_pb2.TokenResponse(
+            access_token="mock_grpc_access",
+            refresh_token="mock_grpc_refresh",
+            token_type="bearer",
+        )
+
+    monkeypatch.setattr(AuthgRPCClient, "register", mock_register)
+    monkeypatch.setattr(AuthgRPCClient, "login", mock_login)
+
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
-    ) as ac:
+    ) as ac, app.router.lifespan_context(app):
         # Register user
         response = await ac.post(
             "/api/v1/auth/register",
@@ -61,11 +77,25 @@ async def test_register_and_login() -> None:
 
 
 @pytest.mark.anyio
-async def test_login_invalid_credentials() -> None:
-    """Test login failure with incorrect password."""
+async def test_login_invalid_credentials(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Test login failure with incorrect password via mocked gRPC error."""
+    async def mock_login_error(  # pylint: disable=unused-argument
+        self,
+        email: str,
+        password: str,
+    ) -> auth_pb2.TokenResponse:
+        raise grpc.aio.AioRpcError(
+            code=grpc.StatusCode.UNAUTHENTICATED,
+            initial_metadata=tuple(),
+            trailing_metadata=tuple(),
+            details="Incorrect email or password",
+        )
+
+    monkeypatch.setattr(AuthgRPCClient, "login", mock_login_error)
+
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
-    ) as ac:
+    ) as ac, app.router.lifespan_context(app):
         response = await ac.post(
             "/api/v1/auth/login",
             data={"username": "nonexistent@example.com", "password": "WrongPassword!"},

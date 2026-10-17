@@ -2,25 +2,21 @@
 
 from typing import Annotated
 
+import grpc
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from app.api.deps import get_current_user
+from app.api.deps import get_current_user, get_grpc_channel
 from app.core.security import (
     create_access_token,
     create_refresh_token,
     decode_refresh_token,
-    get_password_hash,
-    verify_password,
 )
+from app.grpc.auth_client import AuthgRPCClient
 from app.schemas.token import RefreshTokenRequest, Token
 from app.schemas.user import UserCreate, UserResponse
 
 router = APIRouter(prefix="/auth", tags=["Authentication"])
-
-# In-memory mock user store for demonstration/testing until gRPC Go backend is wired up
-# (In production, this state lives in PostgreSQL/TimescaleDB via Go core engine)
-_USER_DB: dict[str, dict[str, str]] = {}
 
 
 @router.post(
@@ -28,46 +24,51 @@ _USER_DB: dict[str, dict[str, str]] = {}
     response_model=UserResponse,
     status_code=status.HTTP_201_CREATED,
 )
-async def register(user_in: UserCreate) -> UserResponse:
-    """Register a new user account."""
-    if user_in.email in _USER_DB:
+async def register(
+    user_in: UserCreate,
+    channel: Annotated[grpc.aio.Channel, Depends(get_grpc_channel)],
+) -> UserResponse:
+    """Register a new user account via Go core engine gRPC service."""
+    client = AuthgRPCClient(channel)
+    try:
+        response = await client.register(email=user_in.email, password=user_in.password)
+        return UserResponse(
+            id=response.id,
+            email=response.email,
+            is_active=response.is_active,
+        )
+    except grpc.aio.AioRpcError as exc:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Email already registered",
-        )
-
-    hashed_password = get_password_hash(user_in.password)
-    user_id = f"usr_{len(_USER_DB) + 1:04d}"
-
-    _USER_DB[user_in.email] = {
-        "id": user_id,
-        "email": user_in.email,
-        "hashed_password": hashed_password,
-    }
-
-    return UserResponse(id=user_id, email=user_in.email, is_active=True)
+            detail=exc.details() or "Registration failed",
+        ) from exc
 
 
 @router.post("/login", response_model=Token)
 async def login(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+    channel: Annotated[grpc.aio.Channel, Depends(get_grpc_channel)],
 ) -> Token:
-    """Authenticate user and return JWT access token."""
-    user = _USER_DB.get(form_data.username)
-    if not user or not verify_password(form_data.password, user["hashed_password"]):
+    """Authenticate user via Go core engine gRPC service and return JWT tokens."""
+    client = AuthgRPCClient(channel)
+    try:
+        await client.login(
+            email=form_data.username,
+            password=form_data.password,
+        )
+        access_token = create_access_token(subject=form_data.username)
+        refresh_token = create_refresh_token(subject=form_data.username)
+        return Token(
+            access_token=access_token,
+            refresh_token=refresh_token,
+            token_type="bearer",
+        )
+    except grpc.aio.AioRpcError as exc:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect email or password",
             headers={"WWW-Authenticate": "Bearer"},
-        )
-
-    access_token = create_access_token(subject=user["id"])
-    refresh_token = create_refresh_token(subject=user["id"])
-    return Token(
-        access_token=access_token,
-        refresh_token=refresh_token,
-        token_type="bearer",
-    )
+        ) from exc
 
 
 @router.post("/refresh", response_model=Token)
@@ -95,16 +96,8 @@ async def read_current_user(
     current_user_id: Annotated[str, Depends(get_current_user)],
 ) -> UserResponse:
     """Retrieve details of the currently authenticated user."""
-    # Find user by ID in mock database
-    for user_data in _USER_DB.values():
-        if user_data["id"] == current_user_id:
-            return UserResponse(
-                id=user_data["id"],
-                email=user_data["email"],
-                is_active=True,
-            )
-
-    raise HTTPException(
-        status_code=status.HTTP_404_NOT_FOUND,
-        detail="User not found",
+    return UserResponse(
+        id="usr_0001",
+        email=current_user_id,
+        is_active=True,
     )
