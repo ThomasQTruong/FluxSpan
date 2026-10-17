@@ -22,8 +22,18 @@ async def test_register_and_login(monkeypatch: pytest.MonkeyPatch) -> None:
             token_type="bearer",
         )
 
+    async def mock_validate_token(  # pylint: disable=unused-argument
+        self,
+        token: str,
+    ) -> auth_pb2.ValidateTokenResponse:
+        return auth_pb2.ValidateTokenResponse(
+            is_valid=True,
+            user_id="integration@example.com",
+        )
+
     monkeypatch.setattr(AuthgRPCClient, "register", mock_register)
     monkeypatch.setattr(AuthgRPCClient, "login", mock_login)
+    monkeypatch.setattr(AuthgRPCClient, "validate_token", mock_validate_token)
 
     async with AsyncClient(
         transport=ASGITransport(app=app), base_url="http://test"
